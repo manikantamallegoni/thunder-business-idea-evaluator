@@ -15,9 +15,9 @@ from langgraph.graph.message import add_messages
 from langgraph.graph import StateGraph, END
 
 
-# =========================
+
 # LOAD ENVIRONMENT
-# =========================
+
 
 load_dotenv()
 
@@ -27,9 +27,7 @@ if not api_key:
     raise ValueError("OPENROUTER_API_KEY not found in .env file")
 
 
-# =========================
 # LLM
-# =========================
 
 llm = ChatOpenAI(
     model="openai/gpt-oss-20b",
@@ -38,9 +36,9 @@ llm = ChatOpenAI(
 )
 
 
-# =========================
+
 # STATE
-# =========================
+
 
 class State(TypedDict):
     idea: str
@@ -49,9 +47,8 @@ class State(TypedDict):
     final_report: str
 
 
-# =========================
 # CONTROLLER
-# =========================
+
 
 controller_prompt = SystemMessage(
     content="""
@@ -88,9 +85,8 @@ def decide_node(state: State):
     }
 
 
-# =========================
 # MARKET ADVISOR
-# =========================
+
 
 def market_analyst_advisor(state: State):
 
@@ -123,9 +119,8 @@ Give practical recommendations.
     }
 
 
-# =========================
 # LEGAL ADVISOR
-# =========================
+
 
 def legal_advisor(state: State):
 
@@ -158,9 +153,8 @@ Give practical recommendations.
     }
 
 
-# =========================
 # TECHNICAL ADVISOR
-# =========================
+
 
 def technical_advisor(state: State):
 
@@ -193,9 +187,9 @@ Give practical recommendations.
     }
 
 
-# =========================
+
 # STRATEGY ADVISOR
-# =========================
+
 
 def strategist_advisor(state: State):
 
@@ -229,9 +223,9 @@ Give practical recommendations.
     }
 
 
-# =========================
+
 # FINAL REPORT
-# =========================
+
 
 def collect_and_report(state: State):
 
@@ -272,9 +266,9 @@ Give practical and realistic recommendations.
     }
 
 
-# =========================
+
 # ADVISOR GRAPH
-# =========================
+
 
 def build_advisor_graph():
 
@@ -338,10 +332,9 @@ def build_advisor_graph():
 advisor_graph = build_advisor_graph()
 
 
-# =========================
 # CHECK WHETHER MORE INFO
 # IS NEEDED
-# =========================
+
 
 def check_business_idea(idea: str, conversation: List[BaseMessage]):
 
@@ -368,9 +361,7 @@ def check_business_idea(idea: str, conversation: List[BaseMessage]):
     }
 
 
-# =========================
 # RUN ADVISORS
-# =========================
 
 def evaluate_business(idea: str, conversation: List[BaseMessage]):
 
